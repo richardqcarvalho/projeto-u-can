@@ -1,18 +1,8 @@
-type AddressProps = {
-  cep: number;
-  rua: string;
-  numero: number;
-  bairro: string;
-  cidade: string;
-};
-
 export type UserProps = {
-  id?: number;
+  code?: string;
   name: string;
-  cpf: string;
-  email: string;
-  password?: string;
-  endereco: AddressProps;
+  birthDate: string;
+  photo?: string;
 };
 
 export type CreateUserProps = (data: UserProps) => void;

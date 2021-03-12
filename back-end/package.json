@@ -28,7 +28,7 @@
     "prettier": "^2.2.1"
   },
   "scripts": {
-    "start": "ts-node",
+    "start": "ts-node src/server.ts",
     "dev": "nodemon"
   }
 }

@@ -1,48 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { LoginProps } from '../models/Login';
 import { CreateUserProps, UserProps } from '../models/User';
 import api from '../services/api';
-import { v4 as uuid } from 'uuid';
 
 const UsersController = () => {
   const history = useHistory();
   const [users, setUsers] = useState<UserProps[]>([]);
 
-  useEffect(() => {
-    getUsers();
-    console.log();
-  }, []);
-
-  const logIn: LoginProps = ({ email, password }) => {
-    const userFinded = users.find(
-      user => user.email === email && user.password === password,
-    );
+  const logIn: LoginProps = async ({ code }) => {
+    const userFinded = await api.get(`/users/${code}`);
     if (userFinded) {
-      localStorage.setItem('token', uuid());
+      localStorage.setItem('code', code);
       history.push('/');
+    } else {
+      //
     }
   };
 
   const getUsers = async () => {
-    const { data } = await api.get('/usuarios');
+    const { data } = await api.get('/users');
 
     setUsers(data);
   };
 
-  const createUser: CreateUserProps = async ({
-    cpf,
-    email,
-    endereco,
-    name,
-    password,
-  }) => {
-    const { data } = await api.post('/usuarios', {
-      cpf,
-      email,
-      endereco,
+  const createUser: CreateUserProps = async ({ name, birthDate }) => {
+    const { data } = await api.post('/users', {
       name,
-      password,
+      birthDate,
     });
 
     return data;
@@ -52,6 +37,7 @@ const UsersController = () => {
     users,
     logIn,
     createUser,
+    getUsers,
   };
 };
 
