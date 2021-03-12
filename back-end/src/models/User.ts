@@ -10,8 +10,8 @@ export type UserProps = {
 
 export const UserModel = client.define('User', {
   code: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
     allowNull: false,
     primaryKey: true,
   },

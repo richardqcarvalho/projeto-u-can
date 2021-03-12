@@ -8,47 +8,66 @@ export const UserController = {
 
     const { name, birthDate } = request.body as UserProps;
 
-    const data = await UserModel.create({
-      name: name,
-      birthDate: birthDate,
-    });
+    try {
+      const data = await UserModel.create({
+        // code: uuid(),
+        name: name,
+        birthDate: birthDate,
+      });
 
-    return response.json(data);
+      return response.json(data);
+    } catch (error) {
+      return response.json(error);
+    }
   },
 
-  async read(_request: Request, response: Response) {
+  async read(request: Request, response: Response) {
     await client.sync();
 
-    const users = await UserModel.findAll();
+    const { code } = request.params;
 
-    return response.json(users);
+    if (code) {
+      const user = await UserModel.findByPk(code);
+      return response.json(user);
+    } else {
+      const users = await UserModel.findAll();
+      return response.json(users);
+    }
   },
 
   async update(request: Request, response: Response) {
     await client.sync();
 
-    const { code } = (request.params as unknown) as { code: number };
+    const { code } = request.params;
     const data = request.body;
 
     const user = await UserModel.findByPk(code);
 
     if (user) {
       Object.keys(data).map((field: string) => user.set(field, data[field]));
-      user.save();
-    }
 
+      try {
+        user.save();
+      } catch (error) {
+        return response.json(error);
+      }
+    }
     return response.json(user);
   },
 
   async delete(request: Request, response: Response) {
     await client.sync();
 
-    const { code } = (request.params as unknown) as { code: number };
+    const { code } = request.params;
 
     const user = await UserModel.findByPk(code);
 
     if (user) {
-      user.destroy();
+      try {
+        user.destroy();
+      } catch (error) {
+        return response.json(error);
+      }
     }
 
     return response.json(user);
