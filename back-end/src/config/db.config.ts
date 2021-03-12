@@ -2,7 +2,7 @@ const config = {
   HOST: 'localhost',
   USER: 'root',
   PASSWORD: '12345678',
-  DB: 'UCAN',
+  DB: 'UCan',
   dialect: 'mysql',
 };
 
