@@ -10,7 +10,7 @@ routes.post(
     [Segments.BODY]: Joi.object().keys({
       name: Joi.string().required(),
       birthDate: Joi.date().required(),
-      photo: Joi.string().required(),
+      photo: Joi.string(),
     }),
   }),
   UserController.create,
@@ -26,19 +26,7 @@ routes.get(
   }),
   UserController.read,
 );
-routes.put(
-  '/users/:code',
-  celebrate({
-    [Segments.PARAMS]: Joi.number().required(),
-  }),
-  UserController.update,
-);
-routes.delete(
-  '/users/:code',
-  celebrate({
-    [Segments.PARAMS]: Joi.number().required(),
-  }),
-  UserController.delete,
-);
+routes.put('/users/:code', UserController.update);
+routes.delete('/users/:code', UserController.delete);
 
 export default routes;
