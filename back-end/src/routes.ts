@@ -15,8 +15,10 @@ routes.post(
   }),
   UserController.create,
 );
-routes.get(
-  '/users',
+routes.get('/users', UserController.read);
+routes.get('/users/:code', UserController.read);
+routes.put(
+  '/users/:code',
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       name: Joi.string(),
@@ -24,9 +26,8 @@ routes.get(
       photo: Joi.string(),
     }),
   }),
-  UserController.read,
+  UserController.update,
 );
-routes.put('/users/:code', UserController.update);
 routes.delete('/users/:code', UserController.delete);
 
 export default routes;
