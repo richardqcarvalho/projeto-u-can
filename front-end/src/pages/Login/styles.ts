@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  padding: 50px;
+  padding: var(--container-padding);
 `;
 
 export const Divider = styled.div`
@@ -29,27 +29,21 @@ export const Divider = styled.div`
 `;
 
 export const ErrorMessage = styled(motion.span)`
-  margin: -15px 0 10px 0;
-  color: red;
+  margin: -10px 0 10px 0;
+  color: var(--error);
+  align-self: center;
+  font-weight: bolder;
 `;
 
 export const Modal = styled(motion.div)`
   position: absolute;
-  background: green;
-  padding: 50px;
+  top: 10px;
+  background: var(--error);
+  padding: 30px;
   border-radius: var(--border-radius);
 `;
 
 export const Text = styled.span`
   color: #fff;
   font-size: 20px;
-`;
-
-export const CloseButton = styled(motion.button)`
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  position: absolute;
-  right: -12.5px;
-  top: -12.5px;
 `;

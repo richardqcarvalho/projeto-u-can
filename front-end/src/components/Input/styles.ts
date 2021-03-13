@@ -10,6 +10,6 @@ export const Field = styled.input`
   border-width: 0;
   color: var(--primary);
   width: var(--input-width);
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   max-width: var(--input-max-width);
 `;
