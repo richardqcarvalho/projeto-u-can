@@ -27,3 +27,29 @@ export const Divider = styled.div`
   height: var(--login-divider-height);
   background: var(--primary);
 `;
+
+export const ErrorMessage = styled(motion.span)`
+  margin: -15px 0 10px 0;
+  color: red;
+`;
+
+export const Modal = styled(motion.div)`
+  position: absolute;
+  background: green;
+  padding: 50px;
+  border-radius: var(--border-radius);
+`;
+
+export const Text = styled.span`
+  color: #fff;
+  font-size: 20px;
+`;
+
+export const CloseButton = styled(motion.button)`
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: -12.5px;
+  top: -12.5px;
+`;
