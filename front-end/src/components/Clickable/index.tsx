@@ -7,7 +7,16 @@ const Clickable: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   style,
 }) => {
   return (
-    <Container onClick={onClick} style={style}>
+    <Container
+      onClick={onClick}
+      style={style}
+      whileHover={{
+        scale: 1.2,
+      }}
+      whileTap={{
+        scale: 0.8,
+      }}
+    >
       {children}
     </Container>
   );
