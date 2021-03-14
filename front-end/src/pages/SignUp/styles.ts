@@ -19,3 +19,17 @@ export const ErrorMessage = styled(motion.span)`
   font-weight: bolder;
   margin: -10px 0 10px 0;
 `;
+
+export const Modal = styled(motion.div)`
+  position: absolute;
+  top: 10px;
+  background: var(--container);
+  padding: 30px;
+  border-radius: var(--border-radius);
+`;
+
+export const Text = styled.span`
+  color: #fff;
+  font-size: 20px;
+  font-weight: bolder;
+`;

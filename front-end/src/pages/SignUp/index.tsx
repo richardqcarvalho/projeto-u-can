@@ -2,16 +2,36 @@ import React from 'react';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import SignUpController from '../../controllers/SignUp';
-import { Wrapper, ErrorMessage } from './styles';
+import { Wrapper, ErrorMessage, Modal, Text } from './styles';
 
 let name: string;
 let birthDate: string;
 
 const SignUp: React.FC = () => {
-  const { signUp, borderWidth, birthDateEmpty, nameEmpty } = SignUpController();
+  const {
+    id,
+    signUp,
+    borderWidth,
+    birthDateEmpty,
+    nameEmpty,
+    idModal,
+  } = SignUpController();
 
   return (
     <Wrapper>
+      <Modal
+        initial={{ y: -20 }}
+        animate={{
+          y: 0,
+          transition: {
+            duration: 1.5,
+          },
+        }}
+        exit={{ y: -20 }}
+        style={{ display: `${idModal ? 'flex' : 'none'}` }}
+      >
+        <Text>{`Seu id é ${id}. Copie-o para acessar a plataforma. Você será redirecionado para a página de login em breve!`}</Text>
+      </Modal>
       <Input
         type="text"
         onChange={e => (name = e.target.value)}
@@ -27,6 +47,9 @@ const SignUp: React.FC = () => {
       <Input
         type="date"
         onChange={e => (birthDate = e.target.value)}
+        onKeyPress={event => {
+          if (event.key === 'Enter') signUp({ name, birthDate });
+        }}
         style={{
           borderWidth: borderWidth(birthDateEmpty),
           borderColor: 'red',
