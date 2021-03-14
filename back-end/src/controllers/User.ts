@@ -10,7 +10,6 @@ export const UserController = {
 
     try {
       const data = await UserModel.create({
-        // code: uuid(),
         name: name,
         birthDate: birthDate,
       });
