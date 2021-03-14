@@ -7,6 +7,8 @@ const SignUpController = () => {
   const history = useHistory();
   const [nameEmpty, setNameEmpty] = useState<boolean>(false);
   const [birthDateEmpty, setBirthDateEmpty] = useState<boolean>(false);
+  const [idModal, setIdModal] = useState<boolean>(false);
+  const [id, setId] = useState<string>('');
 
   const signUp: SignUpProps = async ({ name, birthDate }) => {
     setBirthDateEmpty(false);
@@ -16,12 +18,23 @@ const SignUpController = () => {
     } else if (!birthDate) {
       setBirthDateEmpty(true);
     } else {
-      api.post('/users', {
+      const { data } = await api.post('/users', {
         name,
         birthDate,
       });
-      history.push('/login');
+      setId(data.code);
+      openIdModal();
+      setTimeout(closeIdModal, 10000);
+      setTimeout(() => history.push('/login'), 10000);
     }
+  };
+
+  const openIdModal = () => {
+    setIdModal(true);
+  };
+
+  const closeIdModal = () => {
+    setIdModal(false);
   };
 
   const borderWidth = (choose: boolean) => {
@@ -29,6 +42,8 @@ const SignUpController = () => {
   };
 
   return {
+    id,
+    idModal,
     nameEmpty,
     birthDateEmpty,
     borderWidth,
